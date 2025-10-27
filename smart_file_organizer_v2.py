@@ -40,3 +40,11 @@ def detect_category(mime_type: str) -> str:
         if mime_type.startswith(key):
             return folder
     return 'Others'
+
+# Helper function ti get date folder. you can skip this method as it's only for testing here not necessary for the application
+
+def date_folder(file_path: str) -> str:
+    """returns year-month-date folder name based on the file modification date. """
+    mtime = os.path.getatime(file_path)# This grabs the last access time(last time the file was opened or read)
+    date = datetime.fromtimestamp(mtime)# Turns that time stamp we got into a readable date/time object
+    return date.strftime("%Y-%m-%d")# formates that date into a string like year-month-date
