@@ -48,3 +48,42 @@ def date_folder(file_path: str) -> str:
     mtime = os.path.getatime(file_path)# This grabs the last access time(last time the file was opened or read)
     date = datetime.fromtimestamp(mtime)# Turns that time stamp we got into a readable date/time object
     return date.strftime("%Y-%m-%d")# formates that date into a string like year-month-date
+
+# Main working method : Organize_files()
+
+def organize_files():
+    print("Starting Smart Organization...\n")
+    
+    for filename in os.listdir(SOURCE_DIR): # this list every name(file or folder) inside the SOURCE_DIR.
+        file_path = os.path.join(SOURCE_DIR, filename)# Build the full path for each name (so we can open or move it)
+        
+        # Skip directories
+        if os.path.isdir(file_path): # if the name is a folder , skips it as we only want to organize files not some folders 
+            continue
+        
+        
+        try:
+            # Detect file content type
+            mime_type = magic.from_file(file_path, mime=True)# asking the magic module to read the file's content and say what it is and give me the MIME string
+            category = detect_category(mime_type) # convert the MIME type string into a folder
+        except Exception as e:
+            # if anything goes wrong print a warning
+            print(f"could not read {filename}: {e}")
+            category = 'Unknown'
+            
+        # Create folder for category and date
+        date_folder = date_folder(file_path)# find the file's year-month-date
+        dst_folder = os.path.join(DEST_DIR, category, date_folder)# Build the final destination folder path 
+        os.makedirs(dst_folder, exist_ok=True)# make the destination folder if it doesn't exists
+        
+        # Move file to destination folder
+        dst_path = os.path.join(dst_folder, filename) # full path where the file will be moved
+        shutil.move(file_path, dst_path) # moving the file to the full path with shutil module
+        
+        print(f"{filename} -> {category}/{date_folder}")# tells what i moved 
+        
+        
+        
+        
+print("\n All files organized successfully")# success message after iterating over all the files
+print(f"Organized structure saved under: {DEST_DIR}")
