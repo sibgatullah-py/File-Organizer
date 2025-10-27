@@ -10,3 +10,22 @@ DEST_DIR = os.path.join(SOURCE_DIR, 'Organized') # this will move all the files 
 # if Organized file doesn't exists make it . if exists then do nothing
 os.makedirs(DEST_DIR, exist_ok=True) # this will create the Organized folder if the folder doesn't exist and then move the files there 
 
+# Category Mapping
+'''Category is a dictionary. The left side(keys) are pieces of MIME types. The magic module will read their insides.
+The right side(values) are foolder names we will crate inside Organized, like Images, Videos, Documents and Archives.
+If the MIME file type matches then we will put the file to the designated folder.'''
+CATEGORIES = {
+    'image': 'Images',
+    'video': 'Videos',
+    'audio': 'Audio',
+    'text': 'Documents',
+    'application/pdf': 'Documents',
+    'application/msword': 'Documents',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'Documents',
+    'application/vnd.ms-excel': 'Documents',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'Documents',
+    'application/zip': 'Archives',
+    'application/x-rar': 'Archives',
+    'application/x-7z-compressed': 'Archives',
+    'application/x-tar': 'Archives',
+}
