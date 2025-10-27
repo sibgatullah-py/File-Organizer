@@ -87,3 +87,11 @@ def organize_files():
         
 print("\n All files organized successfully")# success message after iterating over all the files
 print(f"Organized structure saved under: {DEST_DIR}")
+
+
+
+
+
+# This is standerd Python to run the file directly as we know we can use any python method as packages in other files by importing
+if __name__ == '__main__':
+    organize_files()
