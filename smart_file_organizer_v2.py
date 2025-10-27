@@ -14,7 +14,7 @@ os.makedirs(DEST_DIR, exist_ok=True) # this will create the Organized folder if 
 '''Category is a dictionary. The left side(keys) are pieces of MIME types. The magic module will read their insides.
 The right side(values) are foolder names we will crate inside Organized, like Images, Videos, Documents and Archives.
 If the MIME file type matches then we will put the file to the designated folder.'''
-CATEGORIES = {
+CATEGORIES = { # MIME type are actually a string like 'image/png'
     'image': 'Images',
     'video': 'Videos',
     'audio': 'Audio',
@@ -28,4 +28,15 @@ CATEGORIES = {
     'application/x-rar': 'Archives',
     'application/x-7z-compressed': 'Archives',
     'application/x-tar': 'Archives',
-}
+}# note: It will be better if you use ai to get the MIME file types .
+
+# Helper function to detect category . This method works like a filter for the MIME types we will get from the files.
+'''What is does: It loops through our CATEGORIES we made and checks if the mime type starts with any of those keys .
+When the key matches it will put the file in designated folder .
+If the key doesn't match then it will put the file in "Others" folder .'''
+def detect_category(mime_type: str) -> str:
+    """Return folder category name based on MIME type."""
+    for key, folder in CATEGORIES.items():
+        if mime_type.startswith(key):
+            return folder
+    return 'Others'
