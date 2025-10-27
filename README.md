@@ -23,3 +23,32 @@ The script creates a clean, structured directory system — organized by **file 
 -  **Automated File Relocation** – Moves files to their correct destinations.  
 -  **Highly Customizable** – Categories, date format, and directory paths are easy to modify.  
 -  **Cross-Platform** – Works on Windows, Linux, and macOS. 
+
+
+## Install Dependencies
+
+For installing the magic module:
+                                pip install python-magic
+
+## Usage
+
+Edit Configuration
+
+Open the Python file smart_file_organizer_v2.py and set your target folder: SOURCE_DIR = r"C:\Users\YourName\Downloads"
+
+Run the Script: python smart_file_organizer_v2.py
+
+
+## How It Works
+
+1. Scan: The script lists all files in the selected directory.
+
+2. Detect: Each file’s actual content type is determined via python-magic.
+
+3. Categorize: Files are mapped to defined categories (Images, Documents, etc.).
+
+4. Timestamp: The script reads the file’s access/modification date.
+
+5. Organize: It creates destination folders based on category and date (YYYY-MM-DD).
+
+6. Move: Files are relocated to their appropriate folders.
