@@ -34,6 +34,7 @@ CATEGORIES = { # MIME type are actually a string like 'image/png'
 '''What is does: It loops through our CATEGORIES we made and checks if the mime type starts with any of those keys .
 When the key matches it will put the file in designated folder .
 If the key doesn't match then it will put the file in "Others" folder .'''
+# The method indicating it takes a string input and returns a string as output
 def detect_category(mime_type: str) -> str:
     """Return folder category name based on MIME type."""
     for key, folder in CATEGORIES.items():
